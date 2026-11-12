@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: helmet-portal
+    runtime: node
+    region: singapore
+    plan: starter
+    buildCommand: npm i && npm i --prefix server && npm i --include=dev --prefix client && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: DATA_DIR
+        value: /var/data
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: OFFICER_PASSWORD
+        sync: false
+    disk:
+      name: helmet-data
+      mountPath: /var/data
+      sizeGB: 1
